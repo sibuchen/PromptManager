@@ -1,0 +1,243 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark, .dark *));
+
+/* ============================================================
+   DESIGN TOKENS
+   Light Mode  → :root  (The Architectural Light — Light.md)
+   Dark Mode   → .dark  (original dark palette)
+   Tailwind picks up CSS custom properties via @theme inline.
+   Theme switching: toggle `dark` class on <html>.
+   ============================================================ */
+
+@theme inline {
+  /* ── Semantic aliases wired to CSS vars set per-theme ──────── */
+  --color-primary:                    var(--pm-primary);
+  --color-on-primary:                 var(--pm-on-primary);
+  --color-primary-container:          var(--pm-primary-container);
+  --color-on-primary-container:       var(--pm-on-primary-container);
+  --color-primary-fixed:              var(--pm-primary-fixed);
+  --color-primary-fixed-dim:          var(--pm-primary-fixed-dim);
+  --color-on-primary-fixed:           var(--pm-on-primary-fixed);
+  --color-on-primary-fixed-variant:   var(--pm-on-primary-fixed-variant);
+  --color-inverse-primary:            var(--pm-inverse-primary);
+
+  --color-secondary:                  var(--pm-secondary);
+  --color-on-secondary:               var(--pm-on-secondary);
+  --color-secondary-container:        var(--pm-secondary-container);
+  --color-on-secondary-container:     var(--pm-on-secondary-container);
+  --color-secondary-fixed:            var(--pm-secondary-fixed);
+  --color-secondary-fixed-dim:        var(--pm-secondary-fixed-dim);
+  --color-on-secondary-fixed:         var(--pm-on-secondary-fixed);
+  --color-on-secondary-fixed-variant: var(--pm-on-secondary-fixed-variant);
+
+  --color-tertiary:                   var(--pm-tertiary);
+  --color-on-tertiary:                var(--pm-on-tertiary);
+  --color-tertiary-container:         var(--pm-tertiary-container);
+  --color-on-tertiary-container:      var(--pm-on-tertiary-container);
+  --color-tertiary-fixed:             var(--pm-tertiary-fixed);
+  --color-tertiary-fixed-dim:         var(--pm-tertiary-fixed-dim);
+  --color-on-tertiary-fixed:          var(--pm-on-tertiary-fixed);
+  --color-on-tertiary-fixed-variant:  var(--pm-on-tertiary-fixed-variant);
+
+  --color-error:                      var(--pm-error);
+  --color-on-error:                   var(--pm-on-error);
+  --color-error-container:            var(--pm-error-container);
+  --color-on-error-container:         var(--pm-on-error-container);
+
+  --color-background:                 var(--pm-background);
+  --color-on-background:              var(--pm-on-background);
+  --color-surface:                    var(--pm-surface);
+  --color-on-surface:                 var(--pm-on-surface);
+  --color-surface-variant:            var(--pm-surface-variant);
+  --color-on-surface-variant:         var(--pm-on-surface-variant);
+  --color-surface-tint:               var(--pm-surface-tint);
+  --color-surface-dim:                var(--pm-surface-dim);
+  --color-surface-bright:             var(--pm-surface-bright);
+  --color-surface-container-lowest:   var(--pm-surface-container-lowest);
+  --color-surface-container-low:      var(--pm-surface-container-low);
+  --color-surface-container:          var(--pm-surface-container);
+  --color-surface-container-high:     var(--pm-surface-container-high);
+  --color-surface-container-highest:  var(--pm-surface-container-highest);
+  --color-inverse-surface:            var(--pm-inverse-surface);
+  --color-inverse-on-surface:         var(--pm-inverse-on-surface);
+
+  --color-outline:                    var(--pm-outline);
+  --color-outline-variant:            var(--pm-outline-variant);
+
+  /* ── Fonts (static — not theme-dependent) ──────────────────── */
+  --font-headline: "Space Grotesk", sans-serif;
+  --font-body:     "Inter", sans-serif;
+  --font-label:    "Inter", sans-serif;
+  --font-mono:     "JetBrains Mono", monospace;
+}
+
+/* ============================================================
+   LIGHT MODE  (The Architectural Light — Light.md spec)
+   ============================================================ */
+:root {
+  color-scheme: light;
+
+  /* Primary — Indigo brand */
+  --pm-primary:                    #4352a5;
+  --pm-on-primary:                 #ffffff;
+  --pm-primary-container:          #5c6bc0;
+  --pm-on-primary-container:       #ffffff;
+  --pm-primary-fixed:              #dee0ff;
+  --pm-primary-fixed-dim:          #bac3ff;
+  --pm-on-primary-fixed:           #00105b;
+  --pm-on-primary-fixed-variant:   #2f3f92;
+  --pm-inverse-primary:            #bac3ff;
+
+  /* Secondary */
+  --pm-secondary:                  #5d7d8a;
+  --pm-on-secondary:               #ffffff;
+  --pm-secondary-container:        #c9e0ec;
+  --pm-on-secondary-container:     #1a3540;
+  --pm-secondary-fixed:            #cfe6f2;
+  --pm-secondary-fixed-dim:        #b4cad6;
+  --pm-on-secondary-fixed:         #071e27;
+  --pm-on-secondary-fixed-variant: #354a53;
+
+  /* Tertiary */
+  --pm-tertiary:                   #914c00;
+  --pm-on-tertiary:                #ffffff;
+  --pm-tertiary-container:         #ffdcc6;
+  --pm-on-tertiary-container:      #301400;
+  --pm-tertiary-fixed:             #ffdcc6;
+  --pm-tertiary-fixed-dim:         #ffb784;
+  --pm-on-tertiary-fixed:          #301400;
+  --pm-on-tertiary-fixed-variant:  #713700;
+
+  /* Error */
+  --pm-error:                      #ba1a1a;
+  --pm-on-error:                   #ffffff;
+  --pm-error-container:            #ffdad6;
+  --pm-on-error-container:         #410002;
+
+  /* Surfaces — "Clean White" ecosystem (Light.md §2) */
+  --pm-background:                 #f8f9fa;  /* canvas */
+  --pm-on-background:              #191c1d;  /* no pure black */
+  --pm-surface:                    #f8f9fa;
+  --pm-on-surface:                 #191c1d;
+  --pm-surface-variant:            #e4e1ec;
+  --pm-on-surface-variant:         #454651;  /* secondary body text */
+  --pm-surface-tint:               #4352a5;
+  --pm-surface-dim:                #d9dadb;  /* footer grounding */
+  --pm-surface-bright:             #ffffff;
+  --pm-surface-container-lowest:   #ffffff;  /* deep well — editor bg */
+  --pm-surface-container-low:      #f3f4f5;  /* section separator */
+  --pm-surface-container:          #edeeef;  /* card background */
+  --pm-surface-container-high:     #e7e8e9;  /* raised panels / sidebars */
+  --pm-surface-container-highest:  #e1e2e3;
+  --pm-inverse-surface:            #2f3034;
+  --pm-inverse-on-surface:         #f0f0f4;
+
+  /* Outlines — Ghost Border Fallback (Light.md §4) */
+  --pm-outline:                    #757780;
+  --pm-outline-variant:            #c6c5d3;  /* use at 15% opacity where needed */
+}
+
+/* ============================================================
+   DARK MODE  (original canvas palette)
+   Applied when <html> has class="dark"
+   ============================================================ */
+.dark {
+  color-scheme: dark;
+
+  --pm-primary:                    #bac3ff;
+  --pm-on-primary:                 #15267b;
+  --pm-primary-container:          #4453a7;  /* used for gradient start */
+  --pm-on-primary-container:       #c9cfff;  /* was on-primary-container */
+  --pm-primary-fixed:              #dee0ff;
+  --pm-primary-fixed-dim:          #bac3ff;
+  --pm-on-primary-fixed:           #00105b;
+  --pm-on-primary-fixed-variant:   #2f3f92;
+  --pm-inverse-primary:            #4858ab;
+
+  --pm-secondary:                  #b4cad6;
+  --pm-on-secondary:               #1e333c;
+  --pm-secondary-container:        #374c56;
+  --pm-on-secondary-container:     #a6bcc7;
+  --pm-secondary-fixed:            #cfe6f2;
+  --pm-secondary-fixed-dim:        #b4cad6;
+  --pm-on-secondary-fixed:         #071e27;
+  --pm-on-secondary-fixed-variant: #354a53;
+
+  --pm-tertiary:                   #ffb784;
+  --pm-on-tertiary:                #502500;
+  --pm-tertiary-container:         #8f4700;
+  --pm-on-tertiary-container:      #ffc7a2;
+  --pm-tertiary-fixed:             #ffdcc6;
+  --pm-tertiary-fixed-dim:         #ffb784;
+  --pm-on-tertiary-fixed:          #301400;
+  --pm-on-tertiary-fixed-variant:  #713700;
+
+  --pm-error:                      #ffb4ab;
+  --pm-on-error:                   #690005;
+  --pm-error-container:            #93000a;
+  --pm-on-error-container:         #ffdad6;
+
+  --pm-background:                 #111316;
+  --pm-on-background:              #e2e2e6;
+  --pm-surface:                    #111316;
+  --pm-on-surface:                 #e2e2e6;
+  --pm-surface-variant:            #333538;
+  --pm-on-surface-variant:         #c5c5d4;
+  --pm-surface-tint:               #bac3ff;
+  --pm-surface-dim:                #111316;
+  --pm-surface-bright:             #37393d;
+  --pm-surface-container-lowest:   #0c0e11;
+  --pm-surface-container-low:      #1a1c1f;
+  --pm-surface-container:          #1e2023;
+  --pm-surface-container-high:     #282a2d;
+  --pm-surface-container-highest:  #333538;
+  --pm-inverse-surface:            #e2e2e6;
+  --pm-inverse-on-surface:         #2f3034;
+
+  --pm-outline:                    #8f909e;
+  --pm-outline-variant:            #454652;
+}
+
+/* ============================================================
+   UTILITIES
+   ============================================================ */
+@layer utilities {
+  .hide-scrollbar::-webkit-scrollbar { display: none; }
+  .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* Light.md Signature Gradient — indigo135° */
+  .btn-primary-gradient {
+    background: linear-gradient(135deg, #4352a5, #5c6bc0);
+  }
+  .dark .btn-primary-gradient {
+    background: linear-gradient(135deg, #4453a7, #bac3ff33);
+  }
+
+  /* Light.md Ambient Shadow — indigo-tinted */
+  .shadow-ambient {
+    box-shadow: 0 12px 32px -4px rgba(67, 82, 165, 0.08);
+  }
+  .dark .shadow-ambient {
+    box-shadow: 0 12px 32px -4px rgba(186, 195, 255, 0.08);
+  }
+}
+
+/* ============================================================
+   GLOBAL STYLES
+   ============================================================ */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+html {
+  /* Smooth theme transitions — prevents jarring flash */
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--pm-background);
+  color: var(--pm-on-background);
+}
