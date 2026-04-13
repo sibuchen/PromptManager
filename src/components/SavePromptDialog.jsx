@@ -350,10 +350,14 @@ export default function SavePromptDialog({ isOpen, onClose, fileData, originalFi
                       <li>
                         <button
                           onClick={handleNavigateUp}
-                          className="w-full flex items-center gap-3 p-3 hover:bg-surface-container transition-colors cursor-pointer text-left"
+                          className="w-full flex items-center gap-3 p-3 hover:bg-surface-container text-left transition-colors cursor-pointer group"
                         >
-                          <span className="material-symbols-outlined text-outline">folder_up</span>
-                          <span className="text-sm font-medium text-on-surface-variant">..</span>
+                          {/* 统一了图标的颜色和悬停效果，把容易乱码的 folder_up 换成了更清晰的 arrow_upward 或 keyboard_return */}
+                          <span className="material-symbols-outlined text-secondary group-hover:text-primary transition-colors">
+                            keyboard_return
+                          </span>
+                          {/* 统一了文字的颜色亮度 */}
+                          <span className="text-sm font-medium text-on-surface">..</span>
                         </button>
                       </li>
                     )}

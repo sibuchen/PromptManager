@@ -135,13 +135,13 @@ function formatBytes(bytes) {
  */
 async function readFile(dirHandle, filename) {
   const segments = filename.split('/')
-  const name     = segments.pop()          // last segment = file name
-  let   dir      = dirHandle
+  const name = segments.pop()          // last segment = file name
+  let dir = dirHandle
   for (const seg of segments) {
     dir = await dir.getDirectoryHandle(seg) // traverse intermediate dirs
   }
   const fileHandle = await dir.getFileHandle(name)
-  const file       = await fileHandle.getFile()
+  const file = await fileHandle.getFile()
   return file.text()
 }
 
@@ -344,8 +344,8 @@ function parseMarkdown(raw) {
 
   // 最终清理正文中的 HTML 注释
   const finalContent = content
-    .replace(/\n?/g, '')
-    .replace(/\n?/g, '')
+    .replace(/\n?/m, '')
+    .replace(/\n?/m, '')
     .trimStart();
 
   return { metadata: { tags, preview }, content: finalContent };
